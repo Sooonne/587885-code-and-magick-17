@@ -14,14 +14,10 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 150, 50);
 
   var timeMax = Math.max.apply(null, times);
-  // var indexTimeMax = times.indexOf(Math.max.apply(null, times));
-  // console.log(times);
-  // console.log(times.indexOf(Math.max.apply(null, times)));
-  // console.log(names);
 
   for (var i = 0; i < names.length; i++) {
     ctx.fillStyle = names[i] === 'Вы' ? 'rgba(255, 0, 0, 1)' : 'rgba(0, 0, 255, ' + (Math.random() * 0.9 + 0.1) + ')';
-    // opacity should be equal zero
+    // opacity should not be too small
     var height = times[i] * 150 / timeMax;
     ctx.fillRect(150 + 90 * i, 230 - height, 40, height);
     ctx.fillStyle = 'black';
