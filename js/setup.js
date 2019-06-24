@@ -1,9 +1,10 @@
 'use strict';
-
+// popup generating
 var NAMES_OPTIONS = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var SURNAME_OPTIONS = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COLOR_OPTIONS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_OPTIONS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_OPTIONS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var WIZARDS_COUNT = 4;
 
 var showUserDialog = function () {
@@ -53,3 +54,103 @@ var renderWizards = function () {
 
 showUserDialog();
 renderWizards();
+// popup appearing & disappearing
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+var setupOpen = document.querySelector('.setup-open');
+var setup = document.querySelector('.setup');
+var setupClose = setup.querySelector('.setup-close');
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ESC_KEYCODE) {
+      setup.classList.add('hidden');
+    }
+  });
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
+// input setting
+var userNameInput = setup.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('invalid', function (evt) {
+  if (userNameInput.validity.tooShort) {
+    userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else if (userNameInput.validity.tooLong) {
+    userNameInput.setCustomValidity('Имя не должно превышать 25-ти символов');
+  } else if (userNameInput.validity.valueMissing) {
+    userNameInput.setCustomValidity('Обязательное поле');
+  } else {
+    userNameInput.setCustomValidity('');
+  }
+});
+
+userNameInput.addEventListener('input', function (evt) {
+  var target = evt.target;
+  if (target.value.length < 2) {
+    target.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+  } else {
+    target.setCustomValidity('');
+  }
+});
+
+var fillRandom = function (tagName, randomColors) {
+    tagName.style.fill = getRandomOfArray(randomColors);
+};
+
+var changeBackgroundColor = function (tagName, randomColors) {
+  tagName.style.backgroundColor = getRandomOfArray(randomColors);
+};
+
+// change color of coat
+
+var wizardCoatColor = document.querySelector('.setup-wizard .wizard-coat');
+wizardCoatColor.addEventListener('click', function () {
+  fillRandom(wizardCoatColor, COLOR_OPTIONS);
+});
+// now its bad because they can be the same two times
+
+
+// change color of eyes
+var wizardEyesColor = document.querySelector('.setup-wizard .wizard-eyes');
+// now its bad because they can be the same two times
+wizardEyesColor.addEventListener('click', function () {
+  fillRandom(wizardEyesColor, EYES_OPTIONS);
+});
+
+// color of fireball
+var fireballColor = document.querySelector('.setup-fireball-wrap');
+fireballColor.addEventListener('click', function () {
+  changeBackgroundColor(fireballColor, FIREBALL_OPTIONS);
+});
+
