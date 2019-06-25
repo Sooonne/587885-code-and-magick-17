@@ -70,11 +70,7 @@ var onPopupEscPress = function (evt) {
 
 var openPopup = function () {
   setup.classList.remove('hidden');
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
-      setup.classList.add('hidden');
-    }
-  });
+  document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
