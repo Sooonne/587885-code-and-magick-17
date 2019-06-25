@@ -103,7 +103,7 @@ setupClose.addEventListener('keydown', function (evt) {
 // input setting
 var userNameInput = setup.querySelector('.setup-user-name');
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя должно состоять минимум из 2-х символов');
   } else if (userNameInput.validity.tooLong) {
@@ -145,7 +145,7 @@ wizardEyesColor.addEventListener('click', function (evt) {
 // color of fireball
 var fireballColor = document.querySelector('.setup-fireball-wrap');
 fireballColor.addEventListener('click', function (evt) {
-  var colorFireball = getRandomOfArray(FIREBALL_OPTIONS)
+  var colorFireball = getRandomOfArray(FIREBALL_OPTIONS);
   evt.currentTarget.style.backgroundColor = colorFireball;
   setup.querySelector('input[name="fireball-color"]').value = colorFireball;
 });
