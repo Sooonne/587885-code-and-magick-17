@@ -61,13 +61,9 @@ var ENTER_KEYCODE = 13;
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var nameInput = setup.querySelector('input[name="username"]');
 
 var onPopupEscPress = function (evt) {
-  //  var focusOnName = setup.querySelector('input[name="username"]:focus');
-
-  //  find input
-  // document.activeElement === input ?
-  var nameInput = setup.querySelector('input[name="username"]');
   if ((document.activeElement !== nameInput) && (evt.keyCode === ESC_KEYCODE)) {
     closePopup();
   }
@@ -128,28 +124,31 @@ userNameInput.addEventListener('input', function (evt) {
 
 // change color of coat
 var wizardCoatColor = setup.querySelector('.wizard-coat');
+var inputCoatColor = setup.querySelector('input[name="coat-color"]');
 wizardCoatColor.addEventListener('click', function (evt) {
   var colorCoat = getRandomOfArray(COLOR_OPTIONS);
   evt.currentTarget.style.fill = colorCoat;
-  setup.querySelector('input[name="coat-color"]').value = colorCoat;
+  inputCoatColor.value = colorCoat;
 });
 // now its bad because they can be the same two times
 
 // change color of eyes
 var wizardEyesColor = setup.querySelector('.wizard-eyes');
 // now its bad because they can be the same two times
+var inputEyesColor = setup.querySelector('input[name="eyes-color"]');
 wizardEyesColor.addEventListener('click', function (evt) {
   var eyesColor = getRandomOfArray(EYES_OPTIONS);
   evt.currentTarget.style.fill = eyesColor;
-  setup.querySelector('input[name="eyes-color"]').value = eyesColor;
+  inputEyesColor.value = eyesColor;
 });
 
 // color of fireball
 var fireballColor = document.querySelector('.setup-fireball-wrap');
+var inputFireballColor = setup.querySelector('input[name="fireball-color"]');
 fireballColor.addEventListener('click', function (evt) {
   var colorFireball = getRandomOfArray(FIREBALL_OPTIONS);
   evt.currentTarget.style.backgroundColor = colorFireball;
-  setup.querySelector('input[name="fireball-color"]').value = colorFireball;
+  inputFireballColor.value = colorFireball;
 });
 
 
