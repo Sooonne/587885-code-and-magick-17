@@ -63,7 +63,12 @@ var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE) {
+  //  var focusOnName = setup.querySelector('input[name="username"]:focus');
+
+  //  find input
+  // document.activeElement === input ?
+  var nameInput = setup.querySelector('input[name="username"]');
+  if ((document.activeElement !== nameInput) && (evt.keyCode === ESC_KEYCODE)) {
     closePopup();
   }
 };
@@ -75,6 +80,7 @@ var openPopup = function () {
 
 var closePopup = function () {
   setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
 };
 
 setupOpen.addEventListener('click', function () {
@@ -143,6 +149,7 @@ var fireballColor = document.querySelector('.setup-fireball-wrap');
 fireballColor.addEventListener('click', function (evt) {
   var colorFireball = getRandomOfArray(FIREBALL_OPTIONS);
   evt.currentTarget.style.backgroundColor = colorFireball;
-  setup.querySelector('input[name="fireball-color"]').value = colorFireball;
+  setup.querySelector('input[name="fireball-color"]').value = colorFireball
 });
+
 
