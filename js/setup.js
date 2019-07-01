@@ -149,7 +149,7 @@ var fireballColor = document.querySelector('.setup-fireball-wrap');
 fireballColor.addEventListener('click', function (evt) {
   var colorFireball = getRandomOfArray(FIREBALL_OPTIONS);
   evt.currentTarget.style.backgroundColor = colorFireball;
-  setup.querySelector('input[name="fireball-color"]').value = colorFireball
+  setup.querySelector('input[name="fireball-color"]').value = colorFireball;
 });
 
 
