@@ -54,6 +54,8 @@ var renderWizards = function () {
 
 showUserDialog();
 renderWizards();
+
+// Здесь я открываю/закрываю диалог, а также управляю позицией диалога
 // popup appearing & disappearing
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
@@ -77,6 +79,7 @@ var openPopup = function () {
 var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setup.style = {};
 };
 
 setupOpen.addEventListener('click', function () {
@@ -150,5 +153,11 @@ fireballColor.addEventListener('click', function (evt) {
   evt.currentTarget.style.backgroundColor = colorFireball;
   inputFireballColor.value = colorFireball;
 });
+
+// task 9
+// make draggable dialog
+// first mousedown on .upload
+// stop moving if mouseup and stay on the new place
+// module
 
 
