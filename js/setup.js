@@ -59,13 +59,23 @@
   // renderWizards();
 
   // new task
+  var buttonSubmit = setup.querySelector('.setup-submit');
+  var inputName = setup.querySelector('input[name="username"]');
+
   var form = setup.querySelector('.setup-wizard-form');
   form.addEventListener('submit', function (evt) {
-    window.backend.upload(new FormData(form), function (response) {
-      setup.classList.add('hidden');
-    });
+    window.backend.save(new FormData(form), onDataSave, onDataError);
+    buttonSubmit.disabled = true;
+    inputName.disabled = true;
     evt.preventDefault();
   });
+
+  var onDataSave = function () {
+    setup.classList.add('hidden');
+    buttonSubmit.disabled = false;
+    inputName.disabled = false;
+
+  };
 
   var onDataLoad = function (wizards) {
     renderWizards(wizards);
@@ -82,6 +92,8 @@
 
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
+    buttonSubmit.disabled = false;
+    inputName.disabled = false;
   };
 
   window.backend.load(onDataLoad, onDataError);
